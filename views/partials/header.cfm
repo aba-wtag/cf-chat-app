@@ -13,40 +13,44 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-    <div class="container">
-        <a class="navbar-brand" href="/">cftodo</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                    <cfif isUserInRole('admin')>
-                        <a class="nav-link" href="/admin">admin index</a>
-                    <cfelseif isUserInRole('user')>
-                        <a class="nav-link" href="/user">Chat</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">cfchat</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <cfif isUserInRole('admin')>
+                            <a class="nav-link" href="/admin">admin index</a>
+                        <cfelseif isUserInRole('user')>
+                            <div class="d-flex">
+                                <a class="nav-link" href="/user/profile">Profile</a>
+                                <a class="nav-link" href="/user/chat">Chat</a>
+                            </div>
+                        <cfelse>
+                            <a class="nav-link" href="/">Home</a>
+                        </cfif>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <cfif getAuthUser() neq "">
+                        <cfoutput>
+                            <span class="navbar-text me-3">
+                                Welcome, #getAuthUser()#! Your role is #getUserRoles()#
+                            </span>
+                            <a class="btn btn-danger" href="/logout">Logout</a>
+                        </cfoutput>
                     <cfelse>
-                        <a class="nav-link" href="/">Home</a>
+                        <a class="btn btn-primary me-2" href="/login">Login</a>
+                        <a class="btn btn-secondary" href="/signup">Sign Up</a>
                     </cfif>
-                </li>
-            </ul>
-            <div class="d-flex">
-                <cfif getAuthUser() neq "">
-                    <!-- User is authenticated -->
-                    <cfoutput>
-                        <span class="navbar-text me-3">
-                            Welcome, #getAuthUser()#! Your role is #getUserRoles()#
-                        </span>
-                        <a class="btn btn-danger" href="/logout">Logout</a>
-                    </cfoutput>
-                <cfelse>
-                    <a class="btn btn-primary me-2" href="/login">Login</a>
-                    <a class="btn btn-secondary" href="/signup">Sign Up</a>
-                </cfif>
+                </div>
             </div>
         </div>
-    </div>
-</nav>
+    </nav>
+
+
 
 <!-- Your content goes here -->

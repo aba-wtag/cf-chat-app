@@ -1,0 +1,83 @@
+body {
+    height: 99vh;
+    overflow: hidden;
+}
+
+.chat-container {
+    display: flex;
+    height: 99%;
+}
+
+.sidebar {
+    background-color: #f7f9fa;
+    border-right: 1px solid #dee2e6; /* Optional: make the border visible */
+    width: 249px;
+    overflow-y: auto;
+    padding: 9px;
+}
+
+.chat-area {
+    flex: 1; /* Allow the chat area to grow */
+    display: flex;
+    flex-direction: column;
+    padding: 14px;
+    overflow: hidden; /* Hide overflow for the chat area */
+}
+
+.messages {
+    flex: 1; /* Allow the messages to take up available space */
+    overflow-y: auto; /* Make messages scrollable */
+    padding-right: 14px; /* Add padding to avoid content touching the scrollbar */
+    display: flex;
+    flex-direction: column; /* Arrange messages vertically */
+}
+
+.message {
+    margin-bottom: 9px;
+    padding: 9px;
+    border-radius: 9px;
+    max-width: 69%;
+}
+
+.message-time {
+    font-size: 0.8rem; /* Adjust font size for visibility */
+    color: gray;
+    margin-bottom: 4px;
+}
+
+.sent {
+    background-color: #d0e7dd;
+    align-self: flex-end; /* Align sent messages to the right */
+}
+
+.received {
+    background-color: #f7d7da;
+    align-self: flex-start; /* Align received messages to the left */
+}
+
+.input-container {
+    display: flex;
+    padding: 9px;
+    border-top: 1px solid #dee2e6; /* Make the border visible */
+}
+
+.input-box {
+    flex: 1; /* Make input box take remaining space */
+    padding: 9px;
+    border: 1px solid #dee2e6;
+    border-radius: 19px;
+    margin-right: 9px;
+}
+
+.send-button {
+    padding: 9px 15px;
+    border: none;
+    border-radius: 19px;
+    background-color: #006bff;
+    color: white;
+    cursor: pointer;
+}
+
+.send-button:hover {
+    background-color: #0055b3;
+}

@@ -1,4 +1,4 @@
-<cfinclude template="./partials/header.cfm" runonce="true"/>
+<cfinclude template="/views/partials/header.cfm" runonce="true"/>
 
 <div class="container mt-5 d-flex justify-content-center align-items-center">
     <div class="text-center">
@@ -8,4 +8,4 @@
 </div>
 
 
-<cfinclude template="./partials/footer.cfm" runonce="true"/>
+<cfinclude template="/views/partials/footer.cfm" runonce="true"/>
