@@ -2,7 +2,7 @@ component signup {
 
     public void function insertToDB(required string username, required string password) {
         try {
-            var sql = "INSERT INTO user (username, password) VALUES (:username, :password)";
+            var sql = "INSERT INTO users (username, password) VALUES (:username, :password)";
             
             var qry = new Query();
             qry.setSQL(sql);

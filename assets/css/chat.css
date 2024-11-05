@@ -81,3 +81,9 @@ body {
 .send-button:hover {
     background-color: #0055b3;
 }
+
+.center-message {
+    font-size: 1.5rem; /* Adjust font size as needed */
+    text-align: center; /* Center text */
+    justify-content: center;
+}

@@ -2,7 +2,7 @@ component login {
 
     public struct function checkValidity(required string username, required string password) {
 
-        var qry = "select * from user where username = :username";
+        var qry = "select * from users where username = :username";
         var findUserNameQuery = new Query();
         findUserNameQuery.setSQL(qry);
         findUserNameQuery.addParam(name="username", value=arguments.username, cfsqltype="cf_sql_varchar");

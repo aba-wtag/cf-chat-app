@@ -9,7 +9,12 @@ component {
     this.mappings['/controllers'] = getDirectoryFromPath(getCurrentTemplatePath()) & "controllers";
     this.mappings['/assets'] = getDirectoryFromPath(getCurrentTemplatePath()) & "assets";
 
+    public void function onApplicationStart() {
+        WebsocketServer("/ws/chat/{channel}", new controllers.chat.ChatListener());
+    }
+
     public void function onRequest() {
         new routes().init();
     }
+
 }
