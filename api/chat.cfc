@@ -51,4 +51,15 @@ component restpath="/chat"  rest="true" {
 
         return {"message": "error happened"};
     }
+
+    remote any function getChatMessages(required struct data) httpmethod="POST" restpath="getchatmessages" {
+        var qry = "SELECT * FROM messages WHERE chat_id = :chat_id";
+        var findMessages = new Query();
+        findMessages.setSQL(qry);
+        findMessages.addParam(name="chat_id", value=arguments.data.chat_id, cfsqltype="cf_sql_integer");
+        var result = new lib.Converter().queryToArray(findMessages.execute().getResult());
+
+        return result;
+
+    }
 }

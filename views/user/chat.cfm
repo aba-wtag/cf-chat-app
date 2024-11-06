@@ -20,21 +20,6 @@
         </ul>
     </div>
     <div class="chat-area" id="chat-area">
-        <div class="messages">
-            <div class="message sent">
-                <div class="message-time">2024-10-28 10:00 AM</div>
-                Wow! How are you?
-            </div>
-            <div class="message received">
-                <div class="message-time">2024-10-28 10:01 AM</div>
-                I’m good, thanks! How about you?
-            </div>
-        </div>
-        
-        <div class="input-container">
-            <input type="text" class="input-box" id="text-to-send" onkeypress="sendOnEnter(event);" placeholder="Type your message..." />
-            <button class="send-button" onClick="sendText();">Send</button>
-        </div>
     </div>
 </div>
 

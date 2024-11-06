@@ -79,9 +79,9 @@ async function displayChat() {
     const urlParams = new URLSearchParams(window.location.search);
     const isChatActive = urlParams.has('chatwith'); // Check if the "chatwith" query parameter exists
     to_username = urlParams.get('chatwith');  // Get the username of the person you want to chat with
-    const chatArea = document.getElementById('chat-area');  // The element where the chat will be displayed
+     // The element where the chat will be displayed
 
-    if (isChatActive) {
+    if (isChatActive && to_username) {
         try {
             // Fetch chat_id from the API endpoint
             const response = await fetch('/rest/api/chat/getchatinfo', {
@@ -100,24 +100,7 @@ async function displayChat() {
                 initializeWebSocket(chat_id);
 
                 // Display existing chat messages (This could be extended with dynamic message loading)
-                const chatMessages = `
-                <div class="messages">
-                    <div class="message sent">
-                        <div class="message-time">2024-10-28 10:00 AM</div>
-                        Wow! How are you?
-                    </div>
-                    <div class="message received">
-                        <div class="message-time">2024-10-28 10:01 AM</div>
-                        I’m good, thanks! How about you?
-                    </div>
-                </div>
-                
-                <div class="input-container">
-                    <input type="text" class="input-box" id="text-to-send" onkeypress="sendOnEnter(event);" placeholder="Type your message..." />
-                    <button class="send-button" onClick="sendText();">Send</button>
-                </div>
-                `;
-                chatArea.innerHTML = chatMessages; // Insert chat messages into the chat area
+                renderMessage(chat_id);
             } else {
                 console.error('Chat ID not found or error occurred.');
             }
@@ -133,5 +116,60 @@ async function displayChat() {
     }
 }
 
+async function renderMessage(chat_id) {
+    const chatArea = document.getElementById('chat-area');
+    
+    // Fetch chat messages from the server
+    const messageResponse = await fetch('/rest/api/chat/getchatmessages', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 'chat_id': chat_id }),
+    });
+
+    const messageData = await messageResponse.json();
+
+    // Initialize an empty string to hold the HTML content
+    let chatMessagesHTML = '<div class="messages">';
+
+    // Loop through each message in the response and create HTML elements
+    messageData.forEach(message => {
+        const formattedTimestamp = formatTimestamp(message.TIMESTAMP);
+        
+        // Check if the message is sent or received based on the "FROM" field
+        const messageClass = message.FROM === from_username ? 'sent' : 'received';
+
+        // Create HTML for the message
+        chatMessagesHTML += `
+            <div class="message ${messageClass}">
+                <div class="message-time">${formattedTimestamp}</div>
+                ${message.BODY}
+            </div>
+        `;
+    });
+
+    // Close the messages container
+    chatMessagesHTML += '</div>';
+
+    // Add the input container below the messages
+    chatMessagesHTML += `
+        <div class="input-container">
+            <input type="text" class="input-box" id="text-to-send" onkeypress="sendOnEnter(event);" placeholder="Type your message..." />
+            <button class="send-button" onClick="sendText();">Send</button>
+        </div>
+    `;
+
+    // Insert the chat messages into the chat area
+    chatArea.innerHTML = chatMessagesHTML;
+
+    // Optionally, scroll to the bottom of the chat area
+    chatArea.scrollTop = chatArea.scrollHeight;
+}
+
+function formatTimestamp(timestamp) {
+    const date = new Date(timestamp);
+    return date.toLocaleString();  // Customize the format as needed
+}
 
 displayChat();
