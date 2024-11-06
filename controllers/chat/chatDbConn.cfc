@@ -8,4 +8,14 @@ component {
 
         return findContactsQueryResult;
     }
+
+    public void function insertMessage(required string body, required string from, required string chat_id) {
+        var qry = "INSERT INTO messages (body, `from`, chat_id) VALUES (:body, :from, :chat_id)";
+        var messageInsertQuery = new Query();
+        messageInsertQuery.setSQL(qry);
+        messageInsertQuery.addParam(name="body", value=arguments.body, cfsqltype="cf_sql_varchar");
+        messageInsertQuery.addParam(name="from", value=arguments.from, cfsqltype="cf_sql_varchar");
+        messageInsertQuery.addParam(name="chat_id", value=arguments.chat_id, cfsqltype="cf_sql_integer");
+        messageInsertQuery.execute();
+    }
 }

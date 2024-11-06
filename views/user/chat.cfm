@@ -42,7 +42,10 @@
 
 <script type="text/javascript">
     <cfoutput>
-        var username = "#getAuthUser()#";
+        let from_username = "#getAuthUser()#";
+        let to_username;
+        let chat_id;
+        let wschat;
     </cfoutput>
     <cfinclude template="./chatHandler.js" />
 </script>
