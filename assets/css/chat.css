@@ -5,7 +5,7 @@ body {
 
 .chat-container {
     display: flex;
-    height: 99%;
+    height: 95%;
 }
 
 .sidebar {
@@ -87,3 +87,12 @@ body {
     text-align: center; /* Center text */
     justify-content: center;
 }
+
+.list-group-item.active {
+    background-color: rgb(0, 107, 255);
+}
+
+.list-group-item.active a {
+    color: white; 
+}
+

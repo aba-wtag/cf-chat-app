@@ -10,10 +10,13 @@
 
 <div class="chat-container" id="chat-container">
     <div class="sidebar">
-        <h5>Contacts</h5>
+        <h6 class="text-center">Contacts</h6>
         <ul class="list-group">
             <cfoutput query="allContact">
-                <li class="list-group-item">
+                <!-- Check if url.chatwith exists and if it matches the username -->
+                <cfset isActive = (StructKeyExists(url, "chatwith") AND url.chatwith EQ username)>
+        
+                <li class="list-group-item <cfif isActive>active</cfif>">
                     <a href="?chatwith=#username#" class="btn btn-link">#username#</a>
                 </li>
             </cfoutput>
@@ -22,7 +25,6 @@
     <div class="chat-area" id="chat-area">
     </div>
 </div>
-
 
 
 <script type="text/javascript">

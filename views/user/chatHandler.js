@@ -109,6 +109,7 @@ async function displayChat() {
         }
 
     } else {
+        const chatArea = document.getElementById('chat-area');
         const promptMessage = `
             <p class="center-message">Click to start chat</p>
         `;
