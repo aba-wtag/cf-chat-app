@@ -17,8 +17,8 @@ component routes
 
         if (CGI.PATH_INFO.startswith("/user") && isUserInRole('user')) {
             router.get("/user/profile", "/views/user/user.cfm");
-            router.get("/user/chat", "/views/user/chat.cfm");
-            router.get("/user/groupchat", "/views/user/groupchat.cfm"); 
+            router.get("/user/chat", "/views/user/single-chat/chat.cfm");
+            router.get("/user/groupchat", "/views/user/group-chat/groupchat.cfm"); 
         } 
 
 
