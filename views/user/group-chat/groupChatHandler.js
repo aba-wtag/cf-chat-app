@@ -56,9 +56,11 @@ document.getElementById("createGroupForm").addEventListener("submit", async func
             console.log("Group created successfully!");
             window.location.href = "/user/groupchat";
         } else {
+            window.location.href = "/user/groupchat";
             console.error("Error creating group:", response.statusText);
         }
     } catch (error) {
         console.error("Network error:", error);
     }
 });
+

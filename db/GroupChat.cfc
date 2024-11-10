@@ -17,6 +17,26 @@ component GroupChat {
         insertGroupMembers.execute();
     }
 
+    public any function getCommonChatId(required array group_members) {
+        var qry = "
+            SELECT cm.chat_id
+            FROM chat_members cm
+            JOIN users u ON cm.user_id = u.user_id
+            WHERE u.username IN (:username_list)
+            GROUP BY cm.chat_id
+            HAVING COUNT(DISTINCT u.username) = :num_members
+        ";
+
+        var chatIDQuery = new Query();
+        chatIDQuery.setSQL(qry);
+        chatIDQuery.addParam(name="username_list", value=arguments.group_members, cfsqltype="cf_sql_varchar", list=true);
+        chatIDQuery.addParam(name="num_members", value=arrayLen(arguments.group_members), cfsqltype="cf_sql_integer");
+
+        var result = chatIDQuery.execute();
+
+        return result.getResult();
+    }
+
     public query function findGroupChatsByUsername(required string username) {
         var qry = "
             SELECT c.chat_name

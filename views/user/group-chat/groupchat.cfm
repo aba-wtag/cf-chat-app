@@ -19,7 +19,7 @@
         <ul class="list-group">
             <cfoutput query="all_group_names">
                 <!--- Check if url.chatwith exists and if it matches the username --->
-                <cfset isActive = (StructKeyExists(url, "groupchatwith") AND url.groupchatwith EQ username)> 
+                <cfset isActive = (StructKeyExists(url, "groupchatwith") AND url.groupchatwith EQ chat_name)> 
         
                 <li class="list-group-item <cfif isActive>active</cfif>">
                     <a href="?groupchatwith=#chat_name#" class="btn btn-link">#chat_name#</a>
