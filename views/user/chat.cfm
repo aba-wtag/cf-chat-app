@@ -1,7 +1,7 @@
 <cfinclude template="/views/partials/header.cfm" runonce="true"/>
 
 <cfscript>
-    allContact = new controllers.chat.chatDbConn().getAllContact(getAuthUser());
+    allContact = new db.Chat().getAllContact(getAuthUser());
 </cfscript>
 
 <style type="text/css">

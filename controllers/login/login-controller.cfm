@@ -1,6 +1,6 @@
 <cfscript>
 
-    var res = new login().checkValidity(form.username, form.password); 
+    var res = new db.Login().checkValidity(form.username, form.password); 
  
     if (res.error) {
        cflocation(url="/", addtoken="false");

@@ -1,4 +1,4 @@
-component login {
+component Login {
 
     public struct function checkValidity(required string username, required string password) {
 

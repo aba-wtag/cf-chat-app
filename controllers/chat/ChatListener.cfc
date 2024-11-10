@@ -13,7 +13,7 @@ component {
 
         var data = deserializeJSON(message);
 
-        new chatDbConn().insertMessage(data.message, data.from, data.chat_id);
+        new db.Chat().insertMessage(data.message, data.from, data.chat_id);
 
         this.notifyChannel(
             arguments.websocket,

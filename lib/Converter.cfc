@@ -1,6 +1,6 @@
 component Converter
     output = false
-    hint = "Helper function for converting a query data type to JSON"
+    hint = "Helper function for converting a query data type to array (JSON)"
     {
 
         public array function queryToArray(required query queryData) {
