@@ -10,63 +10,6 @@ SET NAMES utf8mb4;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
-# Dump of table users
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `users`;
-
-CREATE TABLE `users` (
-  `user_id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `role` varchar(50) DEFAULT 'user',
-  PRIMARY KEY (`user_id`),
-  UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-
-INSERT INTO `users` (`user_id`, `username`, `password`, `role`) VALUES
-	(1, 'hell', 'hello', 'user'),
-	(2, 'eniac00', 'helloworld', 'user'),
-	(3, 'user1', 'hello', 'user'),
-	(4, 'user2', 'hello', 'user'),
-	(5, 'wow', 'wowowow', 'user');
-
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-
-# Dump of table chats
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `chats`;
-
-CREATE TABLE `chats` (
-  `chat_id` int(11) NOT NULL AUTO_INCREMENT,
-  `chat_name` varchar(255) DEFAULT 'general',
-  `is_grouped` tinyint(1) DEFAULT 0,
-  PRIMARY KEY (`chat_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
-
-LOCK TABLES `chats` WRITE;
-/*!40000 ALTER TABLE `chats` DISABLE KEYS */;
-
-INSERT INTO `chats` (`chat_id`, `chat_name`, `is_grouped`) VALUES
-	(38, 'user1-user2', 0),
-	(39, 'user1-eniac00', 0),
-	(40, 'user1-hell', 0),
-	(41, 'user2-eniac00', 0),
-	(42, 'eniac00-wow', 0),
-	(43, 'eniac00-hell', 0);
-
-/*!40000 ALTER TABLE `chats` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-
 # Dump of table messages
 # ------------------------------------------------------------
 
@@ -81,31 +24,36 @@ CREATE TABLE `messages` (
   PRIMARY KEY (`message_id`),
   KEY `chat_id` (`chat_id`),
   CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`chat_id`) REFERENCES `chats` (`chat_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
-LOCK TABLES `messages` WRITE;
-/*!40000 ALTER TABLE `messages` DISABLE KEYS */;
 
-INSERT INTO `messages` (`message_id`, `body`, `from`, `chat_id`, `timestamp`) VALUES
-	(3, 'hello 1', 'user1', 38, '2024-11-06 09:39:01'),
-	(4, 'hello 2', 'user2', 38, '2024-11-06 09:39:05'),
-	(5, 'hello 3', 'user1', 38, '2024-11-06 09:39:10'),
-	(6, 'hello 4', 'user2', 38, '2024-11-06 09:39:14'),
-	(7, 'wow', 'user2', 38, '2024-11-06 10:46:14'),
-	(8, 'wow 2', 'user1', 38, '2024-11-06 10:46:19'),
-	(9, 'hello', 'user1', 39, '2024-11-06 10:46:57'),
-	(10, 'wwer', 'eniac00', 39, '2024-11-06 10:47:31'),
-	(11, 'fgdfg', 'user1', 39, '2024-11-06 10:47:39'),
-	(12, 'hello', 'eniac00', 39, '2024-11-06 10:47:54'),
-	(13, 'hii', 'user1', 39, '2024-11-06 10:47:58'),
-	(14, 'how are you doing?', 'eniac00', 39, '2024-11-06 10:48:03'),
-	(15, 'good', 'user1', 39, '2024-11-06 10:48:09'),
-	(16, 'noice', 'user1', 39, '2024-11-06 10:48:20'),
-	(17, 'ki ', 'eniac00', 39, '2024-11-06 10:48:59'),
-	(18, 'deshi mc', 'user1', 39, '2024-11-06 10:49:13'),
-	(19, 'fgddfg', 'user1', 39, '2024-11-06 10:49:20');
 
-/*!40000 ALTER TABLE `messages` ENABLE KEYS */;
+
+
+# Dump of table users
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `users`;
+
+CREATE TABLE `users` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` varchar(50) DEFAULT 'user',
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+
+INSERT INTO `users` (`user_id`, `username`, `password`, `role`) VALUES
+	(7, 'user1', 'hello', 'user'),
+	(8, 'user2', 'hello', 'user'),
+	(9, 'user3', 'hello', 'user'),
+	(10, 'user4', 'hello', 'user');
+
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
@@ -124,25 +72,23 @@ CREATE TABLE `chat_members` (
   CONSTRAINT `chat_members_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
-LOCK TABLES `chat_members` WRITE;
-/*!40000 ALTER TABLE `chat_members` DISABLE KEYS */;
 
-INSERT INTO `chat_members` (`chat_id`, `user_id`) VALUES
-	(38, 3),
-	(38, 4),
-	(39, 2),
-	(39, 3),
-	(40, 1),
-	(40, 3),
-	(41, 2),
-	(41, 4),
-	(42, 2),
-	(42, 5),
-	(43, 2),
-	(43, 1);
 
-/*!40000 ALTER TABLE `chat_members` ENABLE KEYS */;
-UNLOCK TABLES;
+
+
+# Dump of table chats
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `chats`;
+
+CREATE TABLE `chats` (
+  `chat_id` int(11) NOT NULL AUTO_INCREMENT,
+  `chat_name` varchar(255) DEFAULT 'general',
+  `is_grouped` tinyint(1) DEFAULT 0,
+  PRIMARY KEY (`chat_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+
+
 
 
 
