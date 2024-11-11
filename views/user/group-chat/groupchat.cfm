@@ -81,6 +81,8 @@
 <script type="text/javascript">
     <cfoutput>
         let from_username = "#getAuthUser()#";
+        let chat_id;
+        let wschat;
     </cfoutput>
     <cfinclude template="./groupChatHandler.js" />
 </script>

@@ -54,4 +54,16 @@ component GroupChat {
     
         return result;
     }
+
+    public any function getGroupChatId(required string chat_name) {
+        var qry = "SELECT chat_id FROM chats WHERE chat_name = :chat_name";
+
+        var findChatId = new Query();
+        findChatId.setSQL(qry);
+        findChatId.addParam(name="chat_name", value=arguments.chat_name, cfsqltype="cf_sql_varchar");
+
+        var result = findChatId.execute().getResult();
+
+        return result.getRow(1);
+    }
 }

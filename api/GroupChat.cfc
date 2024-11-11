@@ -21,9 +21,21 @@ component restpath="/groupchat"  rest="true" {
         }
     }
 
+    remote any function getGroupChatId(required struct data) httpmethod="POST" restpath="getgroupchatid" {
+        try {
+            cfheader(statuscode="200");
+            return new db.GroupChat().getGroupChatId(arguments.data.chat_name);
+        } catch (any e) {
+            cfheader(statuscode="500");
+            return { "message": e.message };
+        }
+    }
+
     remote any function test(required struct data) httpmethod="POST" restpath="test" {
         var result = new db.GroupChat().getCommonChatId(arguments.data.group_members);
         cfheader(statuscode="200");
         return len(result);
     }
+
+
 }

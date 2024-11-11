@@ -45,6 +45,13 @@ body {
     margin-bottom: 4px;
 }
 
+.message-correspondance {
+    font-size: 0.8rem; /* Adjust font size for visibility */
+    color: rgb(93, 87, 167);
+    margin-bottom: 4px;
+}
+
+
 .sent {
     background-color: #d0e7dd;
     align-self: flex-end; /* Align sent messages to the right */
